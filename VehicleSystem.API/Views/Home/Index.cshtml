@@ -1,0 +1,54 @@
+﻿@using VehicleSystem.API.Models
+
+
+@model VehicleSearchResultViewModel
+
+@{
+    ViewData["Title"] = "Vehicle Search";
+}
+
+<div class="container py-4">
+    <h2 class="mb-4">Search Vehicles</h2>
+
+    <form method="post" asp-action="Search" class="row g-3 align-items-end mb-5">
+        <div class="col-md-5">
+            <label for="makeId" class="form-label">Make</label>
+            <select class="form-select" id="makeId" name="MakeId" required>
+                <option value="">-- Select Make --</option>
+                @foreach (var make in Model.Makes)
+                {
+                    <option value="@make.ID">@make.MakeName</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="year" class="form-label">Year</label>
+            <input type="number" class="form-control" id="year" name="Year" min="1900" max="@DateTime.Now.Year" value="@Model.Year" required />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+
+    @if (Model.Models != null && Model.Models.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var car in Model.Models)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@car.ModelName</h5>
+                            <p class="card-text mb-1"><strong>Make:</strong> @car.MakeName</p>
+                            <p class="card-text"><strong>Type:</strong> @car.VehicleType</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else if (Model.Models != null)
+    {
+        <p class="text-muted">No vehicle models found for the selected criteria.</p>
+    }
+</div>

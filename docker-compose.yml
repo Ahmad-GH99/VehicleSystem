@@ -1,0 +1,6 @@
+services:
+  prevehiclesystem.api:
+    image: ${DOCKER_REGISTRY-}vehiclesystemapi
+    build:
+      context: .
+      dockerfile: VehicleSystem.API/Dockerfile
