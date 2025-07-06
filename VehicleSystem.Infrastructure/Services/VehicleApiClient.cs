@@ -1,13 +1,8 @@
 ﻿using VehicleSystem.Domain.Entities;
 using VehicleSystem.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace VehicleSystem.Infrastructure.Services
 {
@@ -65,15 +60,5 @@ namespace VehicleSystem.Infrastructure.Services
                 throw;
             }
         }
-    }
-    public class NhtsaResponse<T>
-    {
-        public int Count { get; set; }
-
-        public string Message { get; set; }
-
-        public string? SearchCriteria { get; set; }
-
-        public List<T> Results { get; set; } = new List<T>();
     }
 }

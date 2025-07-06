@@ -1,8 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using VehicleSystem.API.Models;
-using VehicleSystem.Application.Services;
-using VehicleSystem.Domain.Entities;
 using VehicleSystem.Domain.Interfaces;
 using VehicleSystem.Models;
 
@@ -10,12 +8,10 @@ namespace VehicleSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IVehicleService _vehicleService;
 
-        public HomeController(ILogger<HomeController> logger , IVehicleService vehicleService)
+        public HomeController( IVehicleService vehicleService)
         {
-            _logger = logger;
             _vehicleService = vehicleService;
         }
 
@@ -27,11 +23,6 @@ namespace VehicleSystem.Controllers
                 Makes = makes.OrderBy(m => m.MakeName).ToList()
             };
             return View(model);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [HttpPost]
@@ -60,9 +51,8 @@ namespace VehicleSystem.Controllers
             };
 
             return View("Index", resultViewModel);
-
-
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
